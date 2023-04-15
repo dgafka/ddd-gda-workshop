@@ -1,0 +1,55 @@
+version: "3.8"
+
+services:
+  app:
+    image: simplycodedsoftware/php:8.2
+    volumes:
+      - "$PWD:/data/app"
+    working_dir: "/data/app"
+    command: sleep 99999
+    container_name: "demo_development"
+    user: 1000:1000
+    networks:
+      - default
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      COMPOSE_HTTP_TIMEOUT: 9999
+      APP_INSTALL_DEPENDENCIES: 'yes'
+      RABBIT_DSN: "amqp://rabbitmq:5672"
+      DATABASE_DSN: pgsql://ecotone:secret@database:5432/ecotone
+      XDEBUG_ENABLED: "0"
+      PHP_IDE_CONFIG: "serverName=project"
+  database:
+    image: postgres:12.1
+    networks:
+      - default
+    environment:
+      POSTGRES_USER: "ecotone"
+      POSTGRES_PASSWORD: "secret"
+    ports:
+      - "5432:5432"
+  rabbitmq:
+    image: rabbitmq:3.11-management-alpine
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    networks:
+      - default
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+  ecotone_pulse:
+    image: ecotoneframework/ecotone-pulse:0.1.0
+    environment:
+      AMQP_DSN: "amqp://rabbitmq:5672"
+      SERVICES: '[{"name":"ddd_gda_service","databaseDsn":"pgsql://ecotone:secret@database:5432/ecotone"}]'
+      APP_DEBUG: "true"
+    networks:
+      - default
+    ports:
+      - "3000:80"
+networks:
+  default:
+    external:
+      name: ecotone-test
