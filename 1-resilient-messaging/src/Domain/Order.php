@@ -12,11 +12,11 @@ final class Order
 {
     public function __construct(
         #[AggregateIdentifier] public readonly string $orderId,
-        public readonly string $productId
+        public readonly string $productName
     ) {}
 
-    public static function create(string $userId, string $productId)
+    public static function create(string $userId, string $productName)
     {
-        return new self($userId, $productId);
+        return new self($userId, $productName);
     }
 }

@@ -23,23 +23,29 @@ Składanie zamówienia składa się z dwóch kroków:
 
 ## Wywołanie zadania
 
-1. `docker exec -it ecotone_demo php run_example.php`
-2. Gdy zadanie będzie poprawnie zaimplementowane, skrypt poinformuje Cie o tym w innym przypadku wystąpi błąd.
+Wykonaj polecenie z konsoli: `docker exec -it ecotone_demo php run_example.php`  
+Gdy zadanie będzie poprawnie zaimplementowane skrypt poinformuje Cie o tym w innym przypadku wystąpi błąd.
 
 ## Zadanie 1
 
-Związku z tym, że ShippingService to zewnętrzny serwis, nie możemy polegać na jego dostępności.  
-Dlatego chcąc zapewnić stabilność naszego systemu, chcemy przetworzyć wysyłkę zamówenia korzystając z asynchronicznych wiadomości.  
+Związku z tym, że `ShippingService` to zewnętrzny serwis, nie możemy polegać na jego dostępności.  
+Dlatego chcąc rozdzielić zapis zamówienia od wywołania `ShippingService`, chcemy przetworzyć wysyłkę zamówenia korzystając z asynchronicznej wiadomości.  
 
 1. Przerób `OrderService` aby zamiast wywoływać `ShippingService` opublikował `Event` `OrderWasPlaced`.  
-2. Dodaj EventHandler który będzie nasłuchiwał na `OrderWasPlaced` i wywoływał `ShippingService`.
-3. Dodaj asynchroniczny kanał, który będzie wysyłał wiadomości do RabbitMQ: `AmqpBackedMessageChannelBuilder::create("orders")`
+2. Dodaj EventHandler który będzie nasłuchiwał na `OrderWasPlaced` i wywoływał `ShippingService` (Możesz go stworzyć w ramach klasy `src/Application/OrderService.php`).
+3. Dodaj asynchroniczny kanał o nazwie `orders`, który będzie wysyłał wiadomości do RabbitMQ: `AmqpBackedMessageChannelBuilder::create("orders")` (Możesz go stworzyć w ramach klasy `src/Infrastructure/MessageChannelConfiguration.php`)
 4. Wykorzystaj ten kanał, aby przeworzyć EventHandler `OrderWasPlaced` asynchronicznie.
+
+### Podpowiedzi
+
+- [Publikowanie eventów](https://docs.ecotone.tech/modelling/event-handling/dispatching-events#publishing)
+- [Przetwarzanie eventów](https://docs.ecotone.tech/modelling/event-handling/handling-events#registering-class-based-event-handler)
+- [Asynchroniczne przetwarzanie wiadomości](https://docs.ecotone.tech/modelling/asynchronous-handling#running-asynchronously)
 
 ## Zadanie 2 [Opcjonalne]
 
 Message Broker (RabbitMQ), może nie być dostępny w momencie wysyłki wiadomości. 
-W takim przypadku nie uda nam się złożyć zamówienia, lub go dostarczyć.  
+W takim przypadku nie uda nam się zapisać zamówienia, lub go dostarczyć.  
 Chcemy aby nasz system był odporny na takie przypadki.
 
 1. Zaimplementuj mechanizm, który zamiast wysłania wiadomości do RabbitMQ, zapisze (wraz z Order'em) i przetworzy bezpośrednio z bazy danych.    
@@ -47,4 +53,4 @@ Wykorzystaj do tego kanał, który zapisuje wiadomości w bazie danych, zamiast 
 
 ### Podpowiedzi
 
-- [Outbox Pattern](https://docs.ecotone.tech/modelling/error-handling/outbox-pattern)
+- [Outbox Pattern](https://docs.ecotone.tech/modelling/error-handling/outbox-pattern#dbal-message-channel)

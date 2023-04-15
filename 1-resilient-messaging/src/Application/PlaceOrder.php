@@ -6,5 +6,8 @@ namespace App\Application;
 
 final readonly class PlaceOrder
 {
-
+    public function __construct(
+        public string $orderId,
+        public string $productName
+    ) {}
 }
