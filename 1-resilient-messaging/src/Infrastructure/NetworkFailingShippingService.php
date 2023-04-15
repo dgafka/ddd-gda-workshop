@@ -20,7 +20,7 @@ final class NetworkFailingShippingService implements ShippingService
 
         if ($counter <= 3) {
             echo "Network error: $counter";
-            throw new \RuntimeException("Network error");
+            throw new \RuntimeException("Shipping Service is unavailable.");
         }
     }
 }

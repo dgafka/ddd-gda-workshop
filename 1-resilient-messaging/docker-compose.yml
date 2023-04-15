@@ -7,7 +7,7 @@ services:
       - "$PWD:/data/app"
     working_dir: "/data/app"
     command: sleep 99999
-    container_name: "demo_development"
+    container_name: "ecotone_demo"
     user: 1000:1000
     networks:
       - default
