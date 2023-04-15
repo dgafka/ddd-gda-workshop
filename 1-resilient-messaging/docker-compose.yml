@@ -16,10 +16,9 @@ services:
     environment:
       COMPOSE_HTTP_TIMEOUT: 9999
       APP_INSTALL_DEPENDENCIES: 'yes'
-      RABBIT_DSN: "amqp://rabbitmq:5672"
+      RABBIT_DSN: "amqp://guest:guest@rabbitmq:5672/%2f"
       DATABASE_DSN: pgsql://ecotone:secret@database:5432/ecotone
       XDEBUG_ENABLED: "0"
-      PHP_IDE_CONFIG: "serverName=project"
   database:
     image: postgres:12.1
     networks:
@@ -49,7 +48,3 @@ services:
       - default
     ports:
       - "3000:80"
-networks:
-  default:
-    external:
-      name: ecotone-test

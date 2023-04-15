@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Infrastructure;
 
+use Ecotone\Amqp\Configuration\AmqpMessageConsumerConfiguration;
+use Ecotone\Amqp\Distribution\AmqpDistributedBusConfiguration;
 use Ecotone\Dbal\Configuration\DbalConfiguration;
 use Ecotone\Messaging\Attribute\ServiceContext;
 use Ecotone\Messaging\Handler\Recoverability\ErrorHandlerConfiguration;
@@ -38,5 +40,14 @@ final class EcotoneConfiguration
          */
         return DbalConfiguration::createWithDefaults()
                 ->withDocumentStore(enableDocumentStoreAggregateRepository: true);
+    }
+
+    #[ServiceContext]
+    public function distributedConsumer(): AmqpDistributedBusConfiguration
+    {
+        /**
+         * Potrzebne dla komunikacji z Ecotone Pulse
+         */
+        return AmqpDistributedBusConfiguration::createConsumer();
     }
 }
