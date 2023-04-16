@@ -22,7 +22,7 @@ final class NetworkFailingShippingService implements ShippingService
         $this->counter++;
 
         if ($this->counter <= 4) {
-            echo "Network error. Implement asynchronous messaging to solve this.\n";
+            echo "Network error when calling Shipping Service.\n";
             throw new \RuntimeException("Shipping Service is unavailable.\n");
         }
 

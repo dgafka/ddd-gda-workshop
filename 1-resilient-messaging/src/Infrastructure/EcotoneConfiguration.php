@@ -17,7 +17,7 @@ use Ecotone\Messaging\Handler\Recoverability\RetryTemplateBuilder;
 final class EcotoneConfiguration
 {
     #[ServiceContext]
-    public function retryConfiguration()
+    public function retryConfiguration(): ErrorHandlerConfiguration
     {
         /**
          * Konfiguracja dla asynchrocznicznego przetwarzania wiadomości.
