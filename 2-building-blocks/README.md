@@ -35,9 +35,7 @@ Wykonaj polecenie z konsoli: `docker exec -it ecotone_demo php run_example.php`
 
 ### Podpowiedzi
 
-- [Publikowanie eventów](https://docs.ecotone.tech/modelling/event-handling/dispatching-events#publishing)
-- [Przetwarzanie eventów](https://docs.ecotone.tech/modelling/event-handling/handling-events#registering-class-based-event-handler)
-- [Asynchroniczne przetwarzanie wiadomości](https://docs.ecotone.tech/modelling/asynchronous-handling#running-asynchronously)
+- [Obsługa stanu w projekcji])(https://docs.ecotone.tech/modelling/event-sourcing/projections-with-state)
 
 ## Zadanie 2 [Opcjonalne]
 
