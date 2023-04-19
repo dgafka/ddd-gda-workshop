@@ -35,6 +35,7 @@ Wykonaj polecenie z konsoli: `docker exec -it ecotone_demo php run_example.php`
 
 ### Podpowiedzi
 
+- [Budowanie aggregate'ów](https://docs.ecotone.tech/modelling/command-handling/state-stored-aggregate)
 - [Obsługa stanu w projekcji])(https://docs.ecotone.tech/modelling/event-sourcing/projections-with-state)
 
 ## Zadanie 2 [Opcjonalne]

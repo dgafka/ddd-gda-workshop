@@ -13,6 +13,7 @@ use App\Domain\Event\WalletWasSetUp;
 use App\Domain\Wallet;
 use App\ReadModel\WalletBalance;
 use App\ReadModel\WalletBalanceGateway;
+use App\ReadModel\WalletQueryHandler;
 use Ecotone\Lite\EcotoneLite;
 use PHPUnit\Framework\TestCase;
 
@@ -64,12 +65,11 @@ final class WalletTest extends TestCase
         $walletId = "123";
 
         TestCase::assertEquals(
-            [$walletId => 100],
-            EcotoneLite::bootstrapFlowTestingWithEventStore([Wallet::class, WalletBalance::class, WalletBalanceGateway::class], [new WalletBalance()])
+            100,
+            EcotoneLite::bootstrapFlowTestingWithEventStore([Wallet::class, WalletBalance::class, WalletBalanceGateway::class, WalletQueryHandler::class], [new WalletBalance(), new WalletQueryHandler()])
                 ->sendCommand(new SetUpWallet($walletId))
                 ->sendCommand(new DepositMoney($walletId, 100))
-                ->getGateway(WalletBalanceGateway::class)
-                ->getBalance()
+                ->sendQueryWithRouting('getBalance', $walletId)
         );
     }
 
@@ -78,13 +78,12 @@ final class WalletTest extends TestCase
         $walletId = '123';
 
         TestCase::assertEquals(
-            [$walletId => 60],
-            EcotoneLite::bootstrapFlowTestingWithEventStore([Wallet::class, WalletBalance::class, WalletBalanceGateway::class], [new WalletBalance()])
+            60,
+            EcotoneLite::bootstrapFlowTestingWithEventStore([Wallet::class, WalletBalance::class, WalletBalanceGateway::class, WalletQueryHandler::class], [new WalletBalance(), new WalletQueryHandler()])
                 ->sendCommand(new SetUpWallet($walletId))
                 ->sendCommand(new DepositMoney($walletId, 100))
                 ->sendCommand(new WithdrawMoney($walletId, 40))
-                ->getGateway(WalletBalanceGateway::class)
-                ->getBalance()
+                ->sendQueryWithRouting('getBalance', $walletId)
         );
     }
 }
