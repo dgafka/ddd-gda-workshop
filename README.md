@@ -1,4 +1,4 @@
-# DDD Gdańsk Business Oriented Architecture Workshop
+# DDD Gdańsk - Business Oriented Architecture Workshop
 
 W tym repozytorium znajdują się materiały związane z warsztatami dla DDD-GDA.
 
