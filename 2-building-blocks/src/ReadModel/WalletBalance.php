@@ -22,20 +22,4 @@ final class WalletBalance
 
         return $state;
     }
-
-    #[EventHandler]
-    public function whenMoneyWasDeposited(MoneyWasDeposited $event, #[ProjectionState] array $state): array
-    {
-        $state[$event->walletId] += $event->amount;
-
-        return $state;
-    }
-
-    #[EventHandler]
-    public function whenMoneyWasWithdrawn(MoneyWasWithdrawn $event, #[ProjectionState] array $state): array
-    {
-        $state[$event->walletId] -= $event->amount;
-
-        return $state;
-    }
 }

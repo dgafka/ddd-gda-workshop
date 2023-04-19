@@ -41,11 +41,7 @@ final class Wallet
     #[CommandHandler]
     public function withdraw(WithdrawMoney $command): array
     {
-        if ($this->balance < $command->amount) {
-            throw new \RuntimeException("Can't withdraw more than deposited");
-        }
-
-        return [new MoneyWasWithdrawn($command->walletId, $command->amount)];
+        return [];
     }
 
     #[EventSourcingHandler]
@@ -58,11 +54,5 @@ final class Wallet
     public function applyMoneyWasDeposited(MoneyWasDeposited $event): void
     {
         $this->balance += $event->amount;
-    }
-
-    #[EventSourcingHandler]
-    public function applyMoneyWasWithdrawn(MoneyWasWithdrawn $event): void
-    {
-        $this->balance -= $event->amount;
     }
 }
