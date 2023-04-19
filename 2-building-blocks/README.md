@@ -33,16 +33,6 @@ Aby wykonać testy wykonaj polecnie z konsoli: `docker exec -it ecotone_demo ven
 Finalnie, gdy wszystkie testy przechodzą, możemy wywołać produkcyjneg wywołanie naszej aplikacji.
 Wykonaj polecenie z konsoli: `docker exec -it ecotone_demo php run_example.php`
 
-## Zadanie 1
-
-Związku z tym, że `ShippingService` to zewnętrzny serwis, nie możemy polegać na jego dostępności.  
-Dlatego chcąc rozdzielić zapis zamówienia od wywołania `ShippingService`, chcemy przetworzyć wysyłkę zamówenia korzystając z asynchronicznej wiadomości.  
-
-1. Przerób `OrderService` aby zamiast wywoływać `ShippingService` opublikował `Event` `OrderWasPlaced`.  
-2. Dodaj EventHandler który będzie nasłuchiwał na `OrderWasPlaced` i wywoływał `ShippingService` (Możesz go stworzyć w ramach klasy `src/Application/OrderService.php`).
-3. Dodaj asynchroniczny kanał o nazwie `orders`, który będzie wysyłał wiadomości do RabbitMQ: `AmqpBackedMessageChannelBuilder::create("orders")` (Możesz go stworzyć w ramach klasy `src/Infrastructure/MessageChannelConfiguration.php`)
-4. Wykorzystaj ten kanał, aby przeworzyć EventHandler `OrderWasPlaced` asynchronicznie.
-
 ### Podpowiedzi
 
 - [Publikowanie eventów](https://docs.ecotone.tech/modelling/event-handling/dispatching-events#publishing)
