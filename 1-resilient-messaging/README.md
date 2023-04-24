@@ -12,7 +12,7 @@ W edycji kodu projektu pomoże Visual Studio Code: https://code.visualstudio.com
 
 0. Otwórz konsolę komend i przejdź do folderu w którym jest ten plik README.md. Pamiętaj, że wszystkie komendy `docker-compose` zadziałają tylko wtedy, gdy wykonasz je będąc w folderze w którym istnieje plik docker-compose.yml
 1. Uruchom komendę `docker-compose pull && docker-compose up`
-2. W momencie startu kontener z aplikacją zainstaluje dla nas wszystkie zależności. Można to sprawdzić przez `docker logs -f ?nazwa-kontenera?`
+2. W momencie startu kontener z aplikacją zainstaluje dla nas wszystkie zależności. Można to sprawdzić przez `docker logs -f ecotone_demo`
 3. Otwórz Visual Studio Code i w nim, otwórz folder w którym jest ten plik README.
 4. Jesteśmy gotowi do warsztatu. Przejdź do rozdziału 'Zadanie do wykonania' 
 5. Po zakończeniu ćwiczenia, aby usunąć wszystkie kontenery, wpisz komendę `docker-compose down`
