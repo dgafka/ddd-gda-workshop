@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Infrastructure;
 
+use Ecotone\Amqp\AmqpBackedMessageChannelBuilder;
 use Ecotone\Messaging\Attribute\ServiceContext;
 
 final class MessageChannelConfiguration
@@ -14,7 +15,8 @@ final class MessageChannelConfiguration
         /**
          *  Dodaj tutaj konfigurację dla asynchronicznego kanału wiadomości.
          */
+        
 
-        return [];
+        return [AmqpBackedMessageChannelBuilder::create("orders")];
     }
 }
