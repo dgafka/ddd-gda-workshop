@@ -39,7 +39,7 @@ Dlatego chcąc rozdzielić zapis zamówienia od wywołania `ShippingService`, ch
 1. Przerób `OrderService` aby zamiast wywoływać `ShippingService` opublikował `Event` `OrderWasPlaced`.  
 2. Dodaj EventHandler który będzie nasłuchiwał na `OrderWasPlaced` i wywoływał `ShippingService` (Możesz go stworzyć w ramach klasy `src/Application/OrderService.php`).
 3. Dodaj asynchroniczny kanał o nazwie `orders`, który będzie wysyłał wiadomości do RabbitMQ: `\Ecotone\Amqp\AmqpBackedMessageChannelBuilder::create("orders")` (Możesz go stworzyć w ramach klasy `src/Infrastructure/MessageChannelConfiguration.php`)
-4. Wykorzystaj ten kanał, aby przeworzyć EventHandler `OrderWasPlaced` asynchronicznie.
+4. Wykorzystaj ten kanał, aby przetworzyć EventHandler (`OrderWasPlaced`) asynchronicznie.
 
 ### Podpowiedzi
 

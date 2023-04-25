@@ -27,7 +27,7 @@ services:
       POSTGRES_USER: "ecotone"
       POSTGRES_PASSWORD: "secret"
     ports:
-      - "5432:5432"
+      - "4002:5432"
   rabbitmq:
     image: rabbitmq:3.11-management-alpine
     environment:
@@ -36,8 +36,8 @@ services:
     networks:
       - default
     ports:
-      - "15672:15672"
-      - "5672:5672"
+      - "4001:15672"
+      - "4003:5672"
   ecotone_pulse:
     image: ecotoneframework/ecotone-pulse:0.1.0
     environment:
@@ -47,4 +47,4 @@ services:
     networks:
       - default
     ports:
-      - "3001:80"
+      - "4000:80"
