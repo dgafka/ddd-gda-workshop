@@ -53,6 +53,6 @@ function cleanup(\Ecotone\Messaging\Config\ConfiguredMessagingSystem $ecotoneLit
     /** @var AmqpConnectionFactory $amqpConnectionFactory */
     $amqpConnectionFactory = $ecotoneLite->getServiceFromContainer(AmqpConnectionFactory::class);
     $amqpConnectionFactory->createContext()->deleteQueue(new \Interop\Amqp\Impl\AmqpQueue('orders'));
-    $amqpConnectionFactory->createContext()->deleteQueue(new \Interop\Amqp\Impl\AmqpQueue('distributed_example_service'));
+    $amqpConnectionFactory->createContext()->deleteQueue(new \Interop\Amqp\Impl\AmqpQueue('distributed_gda_service'));
     $ecotoneLite->getGatewayByName(DeadLetterGateway::class)->deleteAll();
 }
