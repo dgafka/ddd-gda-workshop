@@ -10,7 +10,7 @@ W celu uruchomienia warsztatu będzie nam potrzebny jedynie [Docker](https://doc
 
 # Instalacja
 
-1. Uruchom komendę `docker-compose pull && docker-compose up -d`
+1. Uruchom komendę `docker-compose pull && docker-compose up`
 2. W momencie startu kontener z aplikacją zainstaluje dla nas wszystkie zależności. Można to sprawdzić przez `docker logs -f demo_development`
 3. Jesteśmy gotowi do warsztatu.
 4. Po zakończeniu ćwiczenia, aby usunąć wszystkie kontenery, wpisz komendę `docker-compose down`

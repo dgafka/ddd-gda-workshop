@@ -4,7 +4,7 @@ services:
   app:
     image: simplycodedsoftware/php:8.2
     volumes:
-      - "$PWD:/data/app"
+      - ".:/data/app"
     working_dir: "/data/app"
     command: sleep 99999
     container_name: "ecotone_demo"
@@ -47,4 +47,4 @@ services:
     networks:
       - default
     ports:
-      - "3000:80"
+      - "3001:80"
