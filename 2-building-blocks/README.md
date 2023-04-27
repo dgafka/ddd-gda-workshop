@@ -37,16 +37,3 @@ Wykonaj polecenie z konsoli: `docker exec -it ecotone_demo php run_example.php`
 
 - [Budowanie aggregate'ów](https://docs.ecotone.tech/modelling/command-handling/state-stored-aggregate)
 - [Obsługa stanu w projekcji])(https://docs.ecotone.tech/modelling/event-sourcing/projections-with-state)
-
-## Zadanie 2 [Opcjonalne]
-
-Message Broker (RabbitMQ), może nie być dostępny w momencie wysyłki wiadomości. 
-W takim przypadku nie uda nam się zapisać zamówienia, lub go dostarczyć.  
-Chcemy aby nasz system był odporny na takie przypadki.
-
-1. Zaimplementuj mechanizm, który zamiast wysłania wiadomości do RabbitMQ, zapisze (wraz z Order'em) i przetworzy bezpośrednio z bazy danych.    
-Wykorzystaj do tego kanał, który zapisuje wiadomości w bazie danych, zamiast `RabbitMQ`: `DbalBackedMessageChannelBuilder::create("orders")`. 
-
-### Podpowiedzi
-
-- [Outbox Pattern](https://docs.ecotone.tech/modelling/error-handling/outbox-pattern#dbal-message-channel)
